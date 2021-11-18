@@ -20,7 +20,6 @@ public class Serveur {
     @NotEmpty(message = "IpAdress ne peutvpas null ou vide")
     @Column(unique = true)
     private String ipAddress;
-    @Column()
     private String name;
     private String memory;
     private String type;

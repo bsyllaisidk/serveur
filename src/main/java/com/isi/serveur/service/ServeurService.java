@@ -6,6 +6,7 @@ import java.util.Collection;
 
 public interface ServeurService {
     Serveur create(Serveur serveur);
+    Serveur ping(Serveur ipAddress);
     Collection<Serveur> lis(int limite);
     Serveur get(Long id);
     Serveur update(Serveur serveur);
