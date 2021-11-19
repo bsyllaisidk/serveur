@@ -16,6 +16,7 @@ import java.util.Collection;
 
 import static com.isi.serveur.enumeration.Status.SERVEUR_DOWN;
 import static com.isi.serveur.enumeration.Status.SERVEUR_UP;
+import static java.lang.Boolean.TRUE;
 
 @RequiredArgsConstructor
 @Transactional
@@ -29,7 +30,6 @@ public class ServeurServiceImpl implements ServeurService {
     public Serveur create(Serveur serveur) {
         log.info("Enregistrer un nouveau serveur : {}",serveur.getName());
         serveur.setImageUrl(SetServeurImageUrl());
-
         return serveurRepo.save(serveur);
     }
 
@@ -44,24 +44,29 @@ public class ServeurServiceImpl implements ServeurService {
     }
 
     @Override
-    public Collection<Serveur> lis(int limite) {
+    public Collection<Serveur> list(int limite) {
         log.info("Fetching all serveurs : {}");
         return serveurRepo.findAll(PageRequest.of(0, limite)).toList();
+
     }
 
     @Override
     public Serveur get(Long id) {
-        return null;
+        log.info("Fetching serveur by Id : {}", id);
+        return serveurRepo.findById(id).get();
     }
 
     @Override
     public Serveur update(Serveur serveur) {
-        return null;
+        log.info("Modifier un serveur : {}",serveur.getName());
+        return serveurRepo.save(serveur);
     }
 
     @Override
-    public Serveur delete(Long id) {
-        return null;
+    public Boolean delete(Long id) {
+        log.info("Supprimer un serveur a parir de Id: {}",id);
+        serveurRepo.deleteById(id);
+        return TRUE;
     }
     private String SetServeurImageUrl() {
         return null;
